@@ -167,8 +167,8 @@ const HeroSection = () => {
               {/* Floating call card */}
               <motion.a
                 href="tel:95553360977"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ ...spring, delay: 0.5 }}
                 whileHover={{ scale: 1.03 }}
                 className="absolute -left-4 top-8 sm:-left-6 bg-background rounded-2xl p-4 shadow-card-hover flex items-center gap-3 z-10"
