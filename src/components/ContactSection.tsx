@@ -2,16 +2,43 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
+import emailjs from "@emailjs/browser";
 
 const spring = { type: "spring" as const, duration: 0.4, bounce: 0 };
 
+const EMAILJS_SERVICE_ID = "service_2k9m7lg";
+const EMAILJS_TEMPLATE_ID = "template_axtgd4g";
+const EMAILJS_PUBLIC_KEY = "RO_m976xyu1d4m5vO";
+
 const ContactSection = () => {
   const [form, setForm] = useState({ name: "", phone: "", message: "" });
+  const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Message sent! Ashfaq will get back to you soon.");
-    setForm({ name: "", phone: "", message: "" });
+    if (!form.name.trim() || !form.phone.trim() || !form.message.trim()) {
+      toast.error("Please fill in all fields.");
+      return;
+    }
+    setSending(true);
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: form.name.trim(),
+          phone: form.phone.trim(),
+          message: form.message.trim(),
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+      toast.success("Message sent! Ashfaq will get back to you soon.");
+      setForm({ name: "", phone: "", message: "" });
+    } catch {
+      toast.error("Failed to send message. Please try calling instead.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -119,11 +146,12 @@ const ContactSection = () => {
             />
             <motion.button
               type="submit"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className="h-11 px-6 rounded-full bg-primary text-primary-foreground font-medium text-sm transition-colors"
+              disabled={sending}
+              whileHover={{ scale: sending ? 1 : 1.03 }}
+              whileTap={{ scale: sending ? 1 : 0.97 }}
+              className="h-11 px-6 rounded-full bg-primary text-primary-foreground font-medium text-sm transition-colors disabled:opacity-60"
             >
-              Send Message
+              {sending ? "Sending…" : "Send Message"}
             </motion.button>
           </motion.form>
         </div>
