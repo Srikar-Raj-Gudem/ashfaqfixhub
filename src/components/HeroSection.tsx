@@ -184,8 +184,8 @@ const HeroSection = () => {
 
               {/* Floating stats card */}
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ ...spring, delay: 0.6 }}
                 className="absolute -right-2 top-1/3 sm:-right-4 bg-background rounded-2xl p-4 shadow-card-hover z-10"
               >
