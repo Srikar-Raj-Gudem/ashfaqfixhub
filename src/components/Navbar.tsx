@@ -5,10 +5,8 @@ import { Menu, X, Phone } from "lucide-react";
 const navLinks = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
-  { label: "Experience", href: "#experience" },
-  { label: "Skills", href: "#skills" },
   { label: "Services", href: "#services" },
-  { label: "Testimonials", href: "#testimonials" },
+  { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -20,11 +18,10 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <a href="#home" className="font-semibold text-lg text-foreground">
-            Ashfaq Ali
+            Ashfaq <span className="text-primary">Ali</span>
           </a>
 
-          {/* Desktop */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -34,16 +31,18 @@ const Navbar = () => {
                 {link.label}
               </a>
             ))}
+          </div>
+
+          <div className="hidden md:flex">
             <a
               href="tel:95553360977"
               className="inline-flex items-center gap-2 h-10 px-5 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
             >
               <Phone size={16} />
-              Call Now
+              Contact Us
             </a>
           </div>
 
-          {/* Mobile toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden p-2 text-foreground"
@@ -79,7 +78,7 @@ const Navbar = () => {
                 className="inline-flex items-center gap-2 h-10 px-5 rounded-full bg-primary text-primary-foreground text-sm font-medium"
               >
                 <Phone size={16} />
-                Call Now
+                Contact Us
               </a>
             </div>
           </motion.div>

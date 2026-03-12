@@ -1,7 +1,15 @@
 import { motion } from "framer-motion";
-import { MapPin, GraduationCap, User } from "lucide-react";
+import { MapPin, GraduationCap, CheckCircle2 } from "lucide-react";
+import aboutImg from "@/assets/about-technician.jpg";
 
 const spring = { type: "spring" as const, duration: 0.4, bounce: 0 };
+
+const highlights = [
+  "Specialized in AC, refrigerator & appliance repair",
+  "2+ years of professional experience",
+  "Trusted by hundreds of satisfied customers",
+  "Serving the greater Hyderabad area",
+];
 
 const AboutSection = () => (
   <section id="about" className="py-16 sm:py-24 bg-muted">
@@ -12,53 +20,61 @@ const AboutSection = () => (
         viewport={{ once: true }}
         transition={spring}
       >
+        <p className="text-sm font-medium text-primary mb-2 uppercase tracking-wide">About Us</p>
         <h2 className="text-foreground mb-12" style={{ fontSize: "clamp(1.75rem, 5vw, 2.25rem)" }}>
-          About Me
+          Your Trusted Appliance{" "}
+          <span className="text-primary">Repair Expert</span>
         </h2>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="md:col-span-2">
-            <p className="text-muted-foreground leading-relaxed max-w-[65ch] mb-6">
-              I am a dedicated and skilled Electronics Technician specializing in the repair and maintenance of home appliances such as air conditioners, refrigerators, and other household electronic devices. With hands-on experience in diagnosing technical issues and providing efficient solutions, I am committed to delivering reliable service and ensuring customer satisfaction.
-            </p>
-            <p className="text-muted-foreground leading-relaxed max-w-[65ch]">
-              My practical knowledge and problem-solving abilities allow me to handle various appliance-related technical challenges effectively.
-            </p>
-          </div>
-
-          <div className="space-y-6">
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center shrink-0">
-                <User size={18} className="text-accent-foreground" />
-              </div>
-              <div>
-                <p className="text-sm font-medium text-foreground">Md. Ashfaq Ali</p>
-                <p className="text-sm text-muted-foreground">Electronics Technician</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center shrink-0">
-                <GraduationCap size={18} className="text-accent-foreground" />
-              </div>
-              <div>
-                <p className="text-sm font-medium text-foreground">Intermediate (Inter Pass)</p>
-                <p className="text-sm text-muted-foreground">Higher secondary education with practical technical focus</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center shrink-0">
-                <MapPin size={18} className="text-accent-foreground" />
-              </div>
-              <div>
-                <p className="text-sm font-medium text-foreground">Hyderabad, India</p>
-                <p className="text-sm text-muted-foreground">Serving the greater Hyderabad area</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </motion.div>
+
+      <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ ...spring, delay: 0.1 }}
+        >
+          <p className="text-muted-foreground leading-relaxed mb-6">
+            I am a dedicated and skilled Electronics Technician specializing in the repair and maintenance of home appliances such as air conditioners, refrigerators, and other household electronic devices. With hands-on experience in diagnosing technical issues and providing efficient solutions, I am committed to delivering reliable service and ensuring customer satisfaction.
+          </p>
+
+          <div className="space-y-3 mb-8">
+            {highlights.map((item) => (
+              <div key={item} className="flex items-center gap-3">
+                <CheckCircle2 size={18} className="text-primary shrink-0" />
+                <p className="text-sm text-foreground font-medium">{item}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex flex-wrap gap-6">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <GraduationCap size={18} className="text-primary" />
+              Intermediate (Inter Pass)
+            </div>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <MapPin size={18} className="text-primary" />
+              Hyderabad, India
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ ...spring, delay: 0.2 }}
+          className="flex justify-center"
+        >
+          <img
+            src={aboutImg}
+            alt="Md. Ashfaq Ali repairing an air conditioner"
+            className="w-full max-w-md rounded-2xl object-cover"
+            style={{ outline: "1px solid rgba(0,0,0,0.05)", outlineOffset: "-1px" }}
+            loading="lazy"
+          />
+        </motion.div>
+      </div>
     </div>
   </section>
 );
