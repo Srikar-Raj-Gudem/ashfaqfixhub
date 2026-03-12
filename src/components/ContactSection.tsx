@@ -146,11 +146,12 @@ const ContactSection = () => {
             />
             <motion.button
               type="submit"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className="h-11 px-6 rounded-full bg-primary text-primary-foreground font-medium text-sm transition-colors"
+              disabled={sending}
+              whileHover={{ scale: sending ? 1 : 1.03 }}
+              whileTap={{ scale: sending ? 1 : 0.97 }}
+              className="h-11 px-6 rounded-full bg-primary text-primary-foreground font-medium text-sm transition-colors disabled:opacity-60"
             >
-              Send Message
+              {sending ? "Sending…" : "Send Message"}
             </motion.button>
           </motion.form>
         </div>
